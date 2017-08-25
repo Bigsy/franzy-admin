@@ -39,26 +39,6 @@
        (.getBrokerInfo zk-utils)
        (codec/decode)))
 
-(defn broker-endpoints-for-channel
-  "Returns all broker info in the cluster matching a keyword representing the given protocol type.
-
-  Valid values are:
-  :ssl
-  :plaintext
-  :sasl_plaintext
-  :sasl_ssl
-  :trace"
-  [^ZkUtils zk-utils protocol-type]
-  ;Scala throws a BrokerEndPointNotAvailableException, but not sure why we care if we're querying.
-  ;There is one exception, which is when a broker dies but we know it should be on a particular channel, in which case returning nil might be less informative.
-  ;Might want to not swallow this, but seems like throwing an exception here makes this api less useful
-  (try
-    (->> protocol-type
-         (codec/encode-security-protocol)
-         (.getAllBrokerEndPointsForChannel zk-utils)
-         (codec/decode))
-    (catch BrokerEndPointNotAvailableException e)))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Write Brokers
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

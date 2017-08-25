@@ -47,7 +47,7 @@
     ;;TODO: verify if blank replica doesn't cause any issues
    (redefine-partition-count! zk-utils topic partitions "" true))
   ([^ZkUtils zk-utils topic partitions replica-assignment check-broker-available?]
-   (AdminUtils/addPartitions zk-utils topic (int partitions) replica-assignment check-broker-available?)))
+   (AdminUtils/addPartitions zk-utils topic (int partitions) replica-assignment check-broker-available? nil)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Replicas

@@ -13,6 +13,7 @@
       "All brokers in the cluster can be queried."
       ;;ex [{:id 0, :endpoints {:plaintext {:host "127.0.0.1", :port 9092, :protocol-type :plaintext}}} {:id 1001, :endpoints {:plaintext {:host "127.0.0.1", :port 9092, :protocol-type :plaintext}}}]
       (let [brokers (all-brokers zk-utils)
+            _(prn brokers)
             broker (first brokers)]
         (nil? brokers) => false
         (coll? brokers) => true
@@ -37,13 +38,6 @@
         (nil? metadata) => false
         (map? metadata) => true
         (s/check fas/Broker metadata) => nil))
-    (fact
-      "Endpoints per channel can be listed."
-      ;;ex: [{:id 0, :host "127.0.0.1", :port 9092} {:id 1001, :host "127.0.0.1", :port 9092}]
-      (let [endpoints (broker-endpoints-for-channel zk-utils :plaintext)]
-        (coll? endpoints) => true
-        (sequential? endpoints) => true
-        (s/check [fas/BrokerEndPoint] endpoints) => nil))
 
     ;(fact
     ;  "A broker can be registered."

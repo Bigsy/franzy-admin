@@ -115,7 +115,7 @@
   "Gets znode data for configuration nodes in Zookeeper."
   [config-type ^String entity-name]
   (-> (codec/encode-config-type config-type)
-      (AdminUtils/getConfigChangeZnodeData entity-name)
+      (AdminUtils/getConfigChangeZnodeData)
       (codec/decode)))
 
 (defn entity-config-root-path [config-type]
@@ -127,7 +127,3 @@
   "Returns the entity config path in Zookeeper, given a config type and the target entity."
   (-> (codec/encode-config-type config-type)
       (ZkUtils/getEntityConfigPath entity)))
-
-(defn entity-config-changes-path []
-  "Returns the entity config changes path in Zookeeper."
-  (ZkUtils/EntityConfigChangesPath))

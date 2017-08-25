@@ -16,7 +16,7 @@
 (defconfig zk-config (io/resource "config/zookeeper.edn"))
 
 (defn make-zk-config []
-  (let [zk-conf (get-in (zk-config) [:kakfa/zookeeper-config])]
+  (let [zk-conf {:servers "127.0.0.1:2181"}]
     (merge (zk-defaults/zk-client-defaults) zk-conf)))
 
 (defn make-zk-client []

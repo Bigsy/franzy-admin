@@ -10,3 +10,5 @@ pom.xml.asc
 log4j.properties
 /resources/config
 /doc/api
+.idea/
+.directory
